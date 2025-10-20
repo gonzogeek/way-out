@@ -23,15 +23,15 @@ function step(timestamp) {
   const dt = timestamp - last;
   last = timestamp;
 
-  for (object of movingObjects) {
-    object.step(dt);
-    object.render();
-  }
-
   if (Math.random() * 100 > 99) {
     let zombie = new Zombie();
     zombie.create();
     movingObjects.add(zombie);
+  }
+
+  for (object of movingObjects) {
+    object.step(dt);
+    object.render();
   }
 
   truck.render();
@@ -44,8 +44,8 @@ function step(timestamp) {
     updateHealth();
   }
 
-  const stutterShift = (-0.1 * elapsed) % 512;
-  road.style.transform = `translateX(${stutterShift}px)`;
+  const stutterShift = (-0.05 * elapsed) % 256;
+  road.style.transform = `translateX(${stutterShift}rem)`;
 
   requestAnimationFrame(step);
 }
@@ -56,7 +56,7 @@ function updatePoints() {
 
 function updateHealth() {
   const healthBar = document.getElementById("health");
-  healthBar.style.width = `${40 * health}px`;
+  healthBar.style.width = `${20 * health}rem`;
 }
 
 requestAnimationFrame(step);

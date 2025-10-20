@@ -1,10 +1,10 @@
 class Truck {
-  pos = 60;
-  cowcatcherWidth = 12;
+  pos = 30;
+  cowcatcherWidth = 6;
   lane = 2;
 
   render() {
-    this.el.style.transform = `translateY(${this.lane * 32}px)`;
+    this.el.style.transform = `translateY(${this.lane * 16}rem)`;
   }
 
   detectCollision(objectArray) {
@@ -29,9 +29,9 @@ class Truck {
   }
 
   switchLanes(key) {
-    if (key == "ArrowUp" && this.lane > 1) {
+    if (["ArrowUp", "w", "W"].includes(key) && this.lane > 1) {
       this.lane -= 1;
-    } else if (key == "ArrowDown" && this.lane < 4) {
+    } else if (["ArrowDown", "s", "S"].includes(key) && this.lane < 4) {
       this.lane += 1;
     }
   }
