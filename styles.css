@@ -59,6 +59,16 @@ body {
   background: url("art/zombie.png") center/cover;
 }
 
+.zombiePart{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 8rem;
+  width: 9rem;
+  z-index: 2;
+  background: url("art/zombie.png") center/cover;
+}
+
 #health {
   position: absolute;
   top: 200rem;

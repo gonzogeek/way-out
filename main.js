@@ -1,4 +1,5 @@
 const road = document.getElementById("road");
+const zombiePartSystem = new ZombiePartSystem();
 let truck = new Truck();
 truck.el = document.getElementById("truck");
 const movingObjects = new Set();
@@ -39,10 +40,21 @@ function step(timestamp) {
   if (roadkill) {
     movingObjects.delete(roadkill[0]);
     roadkill[0].destroy();
-    roadkill[1] === "ouch" ? (health -= 1) : (points += 100);
+    if(roadkill[1] === "ouch") {
+      health -= 1;
+    }else{
+      points += 100;
+      zombiePartSystem.explodeFrom({
+        x: 225 + roadkill[0].pos - 100,
+        y: 116 + truck.lane * 16,
+      });
+    }
     updatePoints();
     updateHealth();
   }
+
+  zombiePartSystem.step(dt);
+  zombiePartSystem.render();
 
   const stutterShift = (-0.05 * elapsed) % 256;
   road.style.transform = `translateX(${stutterShift}rem)`;
