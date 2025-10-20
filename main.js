@@ -42,9 +42,7 @@ function step(timestamp) {
     movingObjects.delete(roadkill[0]);
     roadkill[0].destroy();
     if (roadkill[1] === "ouch") {
-      health -= 1;
-      renderFlash();
-      toggleDeath();
+      handleTruckDamage();
     } else {
       points += 100;
       zombiePartSystem.explodeFrom({
@@ -99,9 +97,26 @@ function updateHealth() {
   healthBar.style.width = `${25 * health}rem`;
 }
 
+function applyWiggle() {
+  truck.el.style.setProperty("--move-distance", `${truck.lane * 16}rem`);
+  truck.el.classList.add("wiggle");
+  truck.el.addEventListener(
+    "animationend",
+    (e) => e.target.classList.remove("wiggle"),
+    { once: true }
+  );
+}
+
 function renderFlash() {
   const flash = document.getElementById("flash");
   flash.style.opacity = `50%`;
+}
+
+function handleTruckDamage() {
+  health -= 1;
+  applyWiggle();
+  renderFlash();
+  toggleDeath();
 }
 
 requestAnimationFrame(step);

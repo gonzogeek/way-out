@@ -119,7 +119,39 @@ body {
 
 .fade-in {
   animation-name: fadeInOpacity;
-  animation-duration: 1s; /* Adjust duration */
-  animation-timing-function: ease-in; /* Adjust timing */
-  animation-fill-mode: forwards; /* Keep the final state after the animation */
+  animation-duration: 1s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes wiggle {
+  0% {
+    transform: translate(1px, calc(1px + var(--move-distance))) rotate(Odeg);
+  }
+  40% {
+    transform: translate(1px, calc(-1px + var(--move-distance))) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, calc(2px + var(--move-distance))) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, calc(1px + var(--move-distance))) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, calc(1px + var(--move-distance))) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, calc(-1px + var(--move-distance))) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, calc(2px + var(--move-distance))) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, calc(-2px + var(--move-distance))) rotate(-1deg);
+  }
+}
+
+.wiggle {
+  animation-name: wiggle;
+  animation-duration: 1s;
 }
