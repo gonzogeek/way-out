@@ -37,7 +37,7 @@ function step(timestamp) {
     return;
   }
 
-  const stutterShift = (-0.1 * elapsed) % 64;
+  const stutterShift = (-0.1 * elapsed) % 512;
   road.style.transform = `translateX(${stutterShift}px)`;
 
   requestAnimationFrame(step);

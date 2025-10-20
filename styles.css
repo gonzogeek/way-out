@@ -24,11 +24,11 @@ body {
 
 #road {
   position: absolute;
-  top: 250px;
+  top: 194px;
   left: calc(50% - 200px);
   background-color: grey;
-  height: 128px;
-  width: 600px;
+  height: 256px;
+  width: 1024px;
   z-index: 0;
   background: url("art/roadSection.png") center/auto 100%;
 }
