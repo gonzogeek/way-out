@@ -1,0 +1,45 @@
+body {
+  image-rendering: pixelated;
+}
+
+#truck {
+  position: absolute;
+  top: 220px;
+  left: 50%;
+  height: 32px;
+  width: 64px;
+  z-index: 1;
+  background: url("art/truck.png") center/cover;
+}
+
+#background {
+  position: absolute;
+  top: 200px;
+  left: calc(50% - 200px);
+  background-color: skyblue;
+  height: 200px;
+  width: 400px;
+  z-index: 0;
+}
+
+#road {
+  position: absolute;
+  top: 250px;
+  left: calc(50% - 200px);
+  background-color: grey;
+  height: 128px;
+  width: 600px;
+  z-index: 0;
+  background: url("art/roadSection.png") center/auto 100%;
+}
+
+.zombie {
+  position: absolute;
+  top: 220px;
+  left: calc(50% + 200px);
+  background-color: greenyellow;
+  height: 32px;
+  width: 18px;
+  z-index: 2;
+  background: url("art/zombie.png") center/cover;
+}
