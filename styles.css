@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "Zombopixel"; /* A name for your font */
+  src: url("fonts/Zombopixel.ttf") format("ttf"),
+    url("fonts/Zombopixel.woff2") format("woff2");
+}
+
 html {
   font-size: round(down, calc(min(100vw, 100vh) / 250), 1px);
   display: flex;
@@ -17,6 +23,7 @@ body {
   background-color: skyblue;
   margin: 0;
   position: relative;
+  font-family: Zombopixel, monospace;
 }
 
 #truck {
@@ -27,16 +34,6 @@ body {
   width: 32rem;
   z-index: 1;
   background: url("art/truck.png") center/cover;
-}
-
-#background {
-  position: absolute;
-  top: 100rem;
-  left: calc(50% - 100rem);
-  background-color: skyblue;
-  height: 100rem;
-  width: 200rem;
-  z-index: 0;
 }
 
 #road {
@@ -71,11 +68,11 @@ body {
 
 #health {
   position: absolute;
-  top: 200rem;
-  left: calc(50% - 100rem);
+  top: 220rem;
+  left: calc(50% - 125rem);
   background-color: red;
   height: 8rem;
-  width: 200rem;
+  width: 250rem;
   z-index: 2;
 }
 
@@ -84,4 +81,29 @@ body {
   top: 5rem;
   left: 5rem;
   font-size: 8rem;
+}
+
+#wastedBanner {
+  text-align: center;
+  display: none;
+  position: absolute;
+  top: 30rem;
+  left: 36rem;
+  font-size: 32rem;
+  color: black;
+  z-index: 5;
+}
+
+#flash {
+  position: absolute;
+  width: 250rem;
+  height: 250rem;
+  overflow: hidden;
+  background-color: red;
+  opacity: 0;
+  z-index: 4;
+}
+
+.regular-text {
+  font-size: 16rem;
 }

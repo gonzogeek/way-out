@@ -7,6 +7,7 @@ let points = 0;
 let health = 10;
 let start;
 let last;
+let dead;
 
 document.addEventListener("keydown", (e) => {
   truck.switchLanes(e.key);
@@ -24,7 +25,7 @@ function step(timestamp) {
   const dt = timestamp - last;
   last = timestamp;
 
-  if (Math.random() * 100 > 99) {
+  if (Math.random() * 100 > 98) {
     let zombie = new Zombie();
     zombie.create();
     movingObjects.add(zombie);
@@ -40,9 +41,11 @@ function step(timestamp) {
   if (roadkill) {
     movingObjects.delete(roadkill[0]);
     roadkill[0].destroy();
-    if(roadkill[1] === "ouch") {
+    if (roadkill[1] === "ouch") {
       health -= 1;
-    }else{
+      renderFlash();
+      handleDeath();
+    } else {
       points += 100;
       zombiePartSystem.explodeFrom({
         x: 225 + roadkill[0].pos - 100,
@@ -56,10 +59,27 @@ function step(timestamp) {
   zombiePartSystem.step(dt);
   zombiePartSystem.render();
 
+  flash.style.opacity -= 0.02;
   const stutterShift = (-0.05 * elapsed) % 256;
   road.style.transform = `translateX(${stutterShift}rem)`;
 
+  if (dead === true) {
+    document.addEventListener("click", (e) => {
+      window.location.reload();
+    });
+    return;
+  }
+
   requestAnimationFrame(step);
+}
+
+function handleDeath() {
+  if (health <= 0) {
+    console.log("dead");
+    const wasted = document.getElementById("wastedBanner");
+    wasted.style.display = `block`;
+    dead = true;
+  }
 }
 function updatePoints() {
   const scoreboard = document.getElementById("scoreboard");
@@ -68,7 +88,12 @@ function updatePoints() {
 
 function updateHealth() {
   const healthBar = document.getElementById("health");
-  healthBar.style.width = `${20 * health}rem`;
+  healthBar.style.width = `${25 * health}rem`;
+}
+
+function renderFlash() {
+  const flash = document.getElementById("flash");
+  flash.style.opacity = `50%`;
 }
 
 requestAnimationFrame(step);
