@@ -56,7 +56,7 @@ body {
   background: url("art/zombie.png") center/cover;
 }
 
-.zombiePart{
+.zombiePart {
   position: absolute;
   top: 0;
   left: 0;
@@ -85,13 +85,13 @@ body {
 
 #wastedBanner {
   text-align: center;
-  display: none;
   position: absolute;
   top: 30rem;
   left: 36rem;
   font-size: 32rem;
   color: black;
   z-index: 5;
+  opacity: 0;
 }
 
 #flash {
@@ -106,4 +106,20 @@ body {
 
 .regular-text {
   font-size: 16rem;
+}
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation-name: fadeInOpacity;
+  animation-duration: 1s; /* Adjust duration */
+  animation-timing-function: ease-in; /* Adjust timing */
+  animation-fill-mode: forwards; /* Keep the final state after the animation */
 }

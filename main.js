@@ -44,7 +44,7 @@ function step(timestamp) {
     if (roadkill[1] === "ouch") {
       health -= 1;
       renderFlash();
-      handleDeath();
+      toggleDeath();
     } else {
       points += 100;
       zombiePartSystem.explodeFrom({
@@ -64,6 +64,7 @@ function step(timestamp) {
   road.style.transform = `translateX(${stutterShift}rem)`;
 
   if (dead === true) {
+    deathAnimation();
     document.addEventListener("click", (e) => {
       window.location.reload();
     });
@@ -73,11 +74,18 @@ function step(timestamp) {
   requestAnimationFrame(step);
 }
 
-function handleDeath() {
+function deathAnimation() {
+  const wasted = document.getElementById("wastedBanner");
+  wasted.classList.add("fade-in");
+  wasted.addEventListener(
+    "animationend",
+    () => element.classList.remove("fade-in"),
+    { once: true }
+  );
+}
+
+function toggleDeath() {
   if (health <= 0) {
-    console.log("dead");
-    const wasted = document.getElementById("wastedBanner");
-    wasted.style.display = `block`;
     dead = true;
   }
 }
