@@ -1,5 +1,6 @@
 class Truck {
   pos = 60;
+  cowcatcherWidth = 12;
   lane = 2;
 
   render() {
@@ -13,10 +14,16 @@ class Truck {
     for (const object of objectArray) {
       if (
         object.pos <= this.pos &&
+        object.pos >= this.pos - this.cowcatcherWidth &&
+        object.lane === this.lane
+      ) {
+        return [object, "woo"];
+      } else if (
+        object.pos <= this.pos &&
         object.pos >= this.pos - this.pos &&
         object.lane === this.lane
       ) {
-        return true;
+        return [object, "ouch"];
       }
     }
   }

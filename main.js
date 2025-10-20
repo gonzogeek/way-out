@@ -1,7 +1,9 @@
 const road = document.getElementById("road");
 let truck = new Truck();
 truck.el = document.getElementById("truck");
-const movingObjects = [];
+const movingObjects = new Set();
+let points = 0;
+let health = 10;
 let start;
 let last;
 
@@ -29,12 +31,17 @@ function step(timestamp) {
   if (Math.random() * 100 > 99) {
     let zombie = new Zombie();
     zombie.create();
-    movingObjects.push(zombie);
+    movingObjects.add(zombie);
   }
 
   truck.render();
-  if (truck.detectCollision(movingObjects)) {
-    return;
+  let roadkill = truck.detectCollision(movingObjects);
+  if (roadkill) {
+    movingObjects.delete(roadkill[0]);
+    roadkill[0].destroy();
+    roadkill[1] === "ouch" ? (health -= 1) : (points += 100);
+    updatePoints();
+    updateHealth();
   }
 
   const stutterShift = (-0.1 * elapsed) % 512;
@@ -42,7 +49,14 @@ function step(timestamp) {
 
   requestAnimationFrame(step);
 }
+function updatePoints() {
+  const scoreboard = document.getElementById("scoreboard");
+  scoreboard.innerText = `Points: ${points}`;
+}
 
-function spawn() {}
+function updateHealth() {
+  const healthBar = document.getElementById("health");
+  healthBar.style.width = `${40 * health}px`;
+}
 
 requestAnimationFrame(step);

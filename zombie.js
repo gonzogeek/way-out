@@ -18,4 +18,8 @@ class Zombie {
   step(dt) {
     this.pos -= dt * this.speedMod;
   }
+
+  destroy() {
+    this.el.remove();
+  }
 }

@@ -26,7 +26,6 @@ body {
   position: absolute;
   top: 194px;
   left: calc(50% - 200px);
-  background-color: grey;
   height: 256px;
   width: 1024px;
   z-index: 0;
@@ -37,9 +36,22 @@ body {
   position: absolute;
   top: 220px;
   left: calc(50% + 200px);
-  background-color: greenyellow;
   height: 32px;
   width: 18px;
   z-index: 2;
   background: url("art/zombie.png") center/cover;
+}
+
+#health {
+  position: absolute;
+  top: 400px;
+  left: calc(50% - 200px);
+  background-color: red;
+  height: 16px;
+  width: 400px;
+  z-index: 2;
+}
+
+#scoreboard {
+  position: relative;
 }
